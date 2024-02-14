@@ -1,6 +1,6 @@
 # GIMC: Go's In-Memory Cache
 
-This is a simple In-memory cache implementation, aimed at readibility & learning. The goals are:
+A Go package for in-memory caching. Aiming at thread-safety, simplicity & code readability.
 - simple, single-value cache
 - support for expiration
 - single method for getting & setting value
