@@ -11,7 +11,7 @@ This is a simple In-memory cache implementation, aimed at readibility & learning
 
 ```
 // first get the package using `go get github.com/azophy/gimc`
-package cache
+package main
 
 import (
 	"fmt"
@@ -20,15 +20,17 @@ import (
   "github.com/azophy/gimc"
 )
 
-var testCache = Cache[int]{}
+var testCache = cache.Cache[int]{}
 
 func main() {
 	_, err := testCache.Fetch(10*time.Second, func() (int, error) { return 3, nil })
 	res, err := testCache.Fetch(3*time.Second, func() (int, error) { return 5, nil })
 
 	if err != nil {
-		fmt.Printf("value from cache is: %d\n", 3) // shoul be 3
+		fmt.Println(err.Error())
 	}
+
+  fmt.Printf("value from cache is: %d\n", res)
 }
 
 ```
