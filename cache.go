@@ -1,4 +1,4 @@
-package main
+package cache
 
 import (
 	"errors"
@@ -14,11 +14,13 @@ type Cache[ValType any] struct {
 	mtx        sync.Mutex
 }
 
+// reset expireTime & val into zero values
 func (c *Cache[ValType]) Reset() {
 	c.expireTime = *new(time.Time)
 	c.val = *new(ValType)
 }
 
+// fetch from cache if it exists & not expired. else load it from loader()
 func (c *Cache[ValType]) Fetch(expireDuration time.Duration, loader func() (ValType, error)) (ValType, error) {
 	var emptyVal ValType
 	if expireDuration < minExpireDurationDiff {
